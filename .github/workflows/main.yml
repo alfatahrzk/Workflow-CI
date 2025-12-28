@@ -22,7 +22,7 @@ jobs:
           pip --version
 
       - name: Install dependencies
-        run: pip install mlflow scikit-learn pandas
+        run: pip install mlflow==2.19.0 scikit-learn pandas seaborn
 
       - name: Set MLflow Tracking URI
         run: echo "MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}" >> $GITHUB_ENV
