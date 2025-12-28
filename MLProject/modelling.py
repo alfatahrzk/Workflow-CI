@@ -10,7 +10,7 @@ import mlflow
 import mlflow.sklearn
 
 # 1. Setup MLflow
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+mlflow.set_experiment("Fashion_Retail_CI")
 mlflow.set_experiment("Fashion_Retail_Skilled_Fix")
 
 # 2. Load Data Preprocessed
