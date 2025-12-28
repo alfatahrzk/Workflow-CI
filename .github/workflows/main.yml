@@ -1,0 +1,43 @@
+name: CI Workflow Skilled
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  mlflow-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - [cite_start]name: Run actions/checkout@v3 [cite: 195]
+        uses: actions/checkout@v3
+
+      - [cite_start]name: Set up Python 3.12.7 [cite: 134, 195]
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7'
+
+      - [cite_start]name: Check Env [cite: 195]
+        run: |
+          python --version
+          pip --version
+
+      - [cite_start]name: Install dependencies [cite: 195]
+        run: pip install mlflow scikit-learn pandas
+
+      - [cite_start]name: Set MLflow Tracking URI [cite: 195]
+        # Gunakake GitHub Secrets kanggo keamanan 
+        run: echo "MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}" >> $GITHUB_ENV
+
+      - [cite_start]name: Run mlflow project [cite: 195]
+        working-directory: ./MLProject
+        run: mlflow run . --no-conda
+
+      - [cite_start]name: Install Python dependencies [cite: 195]
+        run: pip install -r MLProject/requirements.txt
+
+      - [cite_start]name: Upload to GitHub [cite: 195, 196]
+        # Kanggo level Skilled, artefak kudu disimpen ing repo utawa drive [cite: 90]
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model-artifacts
+          path: MLProject/mlruns/
