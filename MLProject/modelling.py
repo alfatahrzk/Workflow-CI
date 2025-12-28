@@ -11,9 +11,7 @@ import mlflow.sklearn
 
 # --- OWAHAN 1: Ora perlu set_experiment amarga wis diatur dening 'mlflow run' ---
 
-# 2. Load Data Preprocessed 
-# Pastikan jeneng folder 'namadataset_preprocessing' padha karo folder ing repo CI sampeyan
-df = pd.read_csv('namadataset_preprocessing/fashion_sales_processed.csv')
+df = pd.read_csv('dataset_preprocessing/fashion_sales_processed.csv')
 X = df.drop('Purchase Amount (USD)', axis=1)
 y = df['Purchase Amount (USD)']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
